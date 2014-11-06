@@ -1,0 +1,117 @@
+#timer_container {
+	margin-top: 10px;
+	height: auto;
+	padding: 5px;
+	background-color: #E3E3E3;
+	border-radius: 13px;
+}
+
+#timer_clock {
+	font-size: 16pt;
+	float: left;
+	padding-top: 3px;
+	margin-right: 4px;
+	border: 1px solid silver;
+	background: #BBB;
+	padding: 4px;
+	border-radius: 8px;
+	color: #F3F3F3;
+}
+
+/* #timer_play_button,#timer_pause_button {
+	border: 1px solid silver;
+	float: left;
+	height: 20px;
+	width: 30px;
+	margin-left: 10px;
+	font-family: Arial Black;
+	font-size: 12pt;
+	text-align: center;
+}
+
+#timer_play_button {
+	background-color: #80F080;
+}
+
+#timer_pause_button {
+	background-color: #F0A5A5;
+} */
+
+#time_entry_hours {
+	width: 180px;
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #e6e6e6;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  padding: 5px 14px 6px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  color: #333;
+  font-size: 13px;
+  line-height: normal;
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+  
+   color: #ffffff !important;
+   margin-left: 4px;
+}
+.btn:hover {
+  background-position: 0 -15px;
+  color: #333;
+  text-decoration: none;
+}
+
+.btn.play {
+	background-color: #57a957;
+	background-repeat: repeat-x;
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#62c462),
+		to(#57a957) );
+	background-image: -moz-linear-gradient(top, #62c462, #57a957);
+	background-image: -ms-linear-gradient(top, #62c462, #57a957);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #62c462),
+		color-stop(100%, #57a957) );
+	background-image: -webkit-linear-gradient(top, #62c462, #57a957);
+	background-image: -o-linear-gradient(top, #62c462, #57a957);
+	background-image: linear-gradient(top, #62c462, #57a957);
+	/* filter: progid :   DXImageTransform.Microsoft.gradient ( startColorstr = '#62c462', endColorstr =   '#57a957', GradientType =   0 ); */
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	border-color: #57a957 #57a957 #3d773d;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn.pause,.alert-message.info {
+	background-color: #339bb9;
+	background-repeat: repeat-x;
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#5bc0de),
+		to(#339bb9) );
+	background-image: -moz-linear-gradient(top, #5bc0de, #339bb9);
+	background-image: -ms-linear-gradient(top, #5bc0de, #339bb9);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5bc0de),
+		color-stop(100%, #339bb9) );
+	background-image: -webkit-linear-gradient(top, #5bc0de, #339bb9);
+	background-image: -o-linear-gradient(top, #5bc0de, #339bb9);
+	background-image: linear-gradient(top, #5bc0de, #339bb9);
+	/* filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
+		'#5bc0de', endColorstr = '#339bb9', GradientType = 0 ); */
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	border-color: #339bb9 #339bb9 #22697d;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
