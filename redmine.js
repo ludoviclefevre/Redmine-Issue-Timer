@@ -1,19 +1,14 @@
-var redmineExtended = (function ($, undefined) {
-    "use strict"
+var redmineIssueTimer = (function ($, undefined) {
+    "use strict";
 
-    var s = 0;
+    var cssPrefix = 'redmine_time_entry_autofill_';
+    var roundInputValueTo = 3;
+    var elapsedSeconds = 0;
     var input;
-    var on = false;
-    var timerPlayButton;
-    var timerPauseButton;
-    var timerClock;
-    var input;
-
-    var lpad = function (str, padString, length) {
-        while (str.length < length)
-            str = padString + str;
-        return str;
-    };
+    var playButton;
+    var pauseButton;
+    var clockLabel;
+    var timerId;
 
     var init = function () {
         input = $('#time_entry_hours');
@@ -21,83 +16,106 @@ var redmineExtended = (function ($, undefined) {
             return;
         }
 
-        var inputValue = input.val();
-        if (jQuery.isNumeric(inputValue)) {
-            s = parseFloat(inputValue);
-            setClockValue();
-        }
+        createContainer();
 
-        timerClock = $('<span id="timer_clock">00:00:00</span>');
-        timerPlayButton = $('<a href="javascript:void(0);" id="timer_play_button" class="btn play">Play</a>');
-        timerPauseButton = $('<a href="javascript:void(0);" id="timer_pause_button" class="btn pause">Pause</a>');
+        loadValueFromInput();
 
-        var timerContainer = $('<div id="timer_container"/>');
-        timerContainer.append(timerClock);
-        timerContainer.append(timerPlayButton);
-        timerContainer.append(timerPauseButton);
+        setClockValue();
+    };
+
+    var createContainer = function() {
+        clockLabel = $('<span id="' + cssPrefix + 'clock">00:00:00</span>');
+        playButton = $('<a href="javascript:void(0);" id="' + cssPrefix + 'play_button" class="' + cssPrefix + 'btn play">Play</a>');
+        pauseButton = $('<a href="javascript:void(0);" id="' + cssPrefix + 'pause_button" class="' + cssPrefix + 'btn pause">Pause</a>');
+
+        var timerContainer = $('<div id="' + cssPrefix + 'container"/>');
+        timerContainer.append(clockLabel);
+        timerContainer.append(playButton);
+        timerContainer.append(pauseButton);
 
         input.parent().append(timerContainer);
 
-        timerPlayButton.click(timer_play);
-        timerPauseButton.click(timer_pause);
+        bindEvents();
     };
 
-    var timer_tic = function () {
-        if (on) {
-            var t = setTimeout(timer_tac, 1000);
+    var bindEvents = function() {
+        playButton.click(onPlayButtonClick);
+        pauseButton.click(onPauseButtonClick);
+    };
+
+    var onPlayButtonClick = function () {
+        if (timerId) {
+            return;
         }
+        startTimer();
+    };
+
+    var onPauseButtonClick = function () {
+        stopTimer();
+    };
+
+    var loadValueFromInput = function () {
+        var inputValue = input.val();
+        if (!$.isNumeric(inputValue)) {
+            return;
+        }
+        var newValue = parseInt(parseFloat(inputValue) * 3600, 10);
+        if (elapsedSeconds === newValue) {
+            return;
+        }
+        elapsedSeconds = newValue;
+    };
+
+    var setClockValue = function () {
+        var formattedValue = secondsToFormattedClockValue(elapsedSeconds);
+        clockLabel.html(formattedValue);
+    };
+
+    var secondsToFormattedClockValue = function (seconds) {
+        var t = parseInt(seconds, 10);
+
+        var h = Math.floor(t / 3600);
+        var m = Math.floor((t - (h * 3600)) / 60);
+        var ss = t - (h * 3600) - (m * 60);
+
+        var formattedValue = leftPadding(h.toString(), '0', 2) + ":" + leftPadding(m.toString(), '0', 2) + ":" + leftPadding(ss.toString(), '0', 2);
+        return formattedValue;
+    };
+
+    var leftPadding = function (str, padString, length) {
+        while (str.length < length) {
+            str = padString + str;
+        }
+        return str;
+    };
+
+    var startTimer = function () {
+        timerId = setInterval(refreshElapsedTimeValue, 1000);
+    };
+
+    var stopTimer = function() {
+        clearInterval(timerId);
+        timerId = null;
+    };
+
+    var refreshElapsedTimeValue = function () {
+        if (!timerId) {
+            return;
+        }
+        elapsedSeconds += 1;
+        setInputValue();
+        setClockValue();
     };
 
     var setInputValue = function () {
         //decimal
-        var numericValue = to_hours(s);
-        input.val(numericValue);
+        var numericValue = secondsToHours(elapsedSeconds);
+        input.val(numericValue.toFixed(roundInputValueTo));
     };
 
-    var setClockValue = function () {
-        //clock
-        var t = s;
-
-        var h = Math.floor(t / 3600).toString();
-        t -= (h * 3600);
-
-        var m = Math.floor(t / 60).toString();
-        t -= (m * 60);
-
-        var ss = t.toString();
-
-        timerClock.html(lpad(h, '0', 2) + ":" + lpad(m, '0', 2) + ":" + lpad(ss, '0', 2));
-    };
-
-    function timer_tac() {
-        if (!on) {
-            return;
-        }
-
-        s += 1;
-
-        setInputValue();
-
-        setClockValue();
-
-        timer_tic();
-    }
-
-    function timer_play() {
-        if (on) {
-            return;
-        }
-        on = true;
-        timer_tic();
-    }
-
-    function timer_pause() {
-        on = false;
-    }
-
-    function to_hours(t) {
+    var secondsToHours = function (t) {
         return (t / 3600);
-    }
+    };
 
     init();
 }(jQuery));
