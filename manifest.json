@@ -1,19 +1,31 @@
 {
-	"manifest_version": 2,
-	"name": "Redmine Issue Timer",
-	"description": "A Redmine extension for timing issues.",
-	"version": "1.0",
-	"browser_action": {
-		"default_icon": {
-			"19": "images/icon19.png",
-			"38": "images/icon38.png"
-		}
-	},
-	"content_scripts": [ {
-		"css": [ "style.css" ],
-		"matches": [ "http://*/*", "https://*/*" ],
-		"js": [ "jquery-1.11.1.min.js", "redmine.js" ],
-		"run_at": "document_end"
-	} ],
-	"update_url": "http://clients2.google.com/service/update2/crx"
+  "manifest_version": 2,
+  "name": "Redmine Issue Timer",
+  "description": "A Redmine extension for timing issues.",
+  "version": "1.0",
+  "icons": {
+    "19": "images/icon19.png",
+    "38": "images/icon38.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "css": ["style.css"],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-1.11.1.min.js",
+        "redmine.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "update_url": "http://clients2.google.com/service/update2/crx"
 }
