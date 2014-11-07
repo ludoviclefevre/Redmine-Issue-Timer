@@ -1,4 +1,4 @@
-#redmine_time_entry_autofill_container {
+#redmine_issue_timer_container {
     margin-top: 10px;
     height: auto;
     padding: 5px;
@@ -6,7 +6,7 @@
     border-radius: 13px;
 }
 
-#redmine_time_entry_autofill_clock {
+#redmine_issue_timer_clock {
     font-size: 16pt;
     float: left;
     padding-top: 3px;
@@ -22,7 +22,7 @@
     width: 180px;
 }
 
-.redmine_time_entry_autofill_btn {
+.redmine_issue_timer_btn {
     cursor: pointer;
     display: inline-block;
     background-color: #e6e6e6;
@@ -55,13 +55,13 @@
     margin-left: 4px;
 }
 
-.redmine_time_entry_autofill_btn:hover {
+.redmine_issue_timer_btn:hover {
     background-position: 0 -15px;
     color: #333;
     text-decoration: none;
 }
 
-.redmine_time_entry_autofill_btn.play {
+.redmine_issue_timer_btn.play {
     background-color: #57a957;
     background-repeat: repeat-x;
     background-image: -khtml-gradient(linear, left top, left bottom, from(#62c462), to(#57a957));
@@ -78,7 +78,7 @@
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-.redmine_time_entry_autofill_btn.pause {
+.redmine_issue_timer_btn.pause {
     background-color: #339bb9;
     background-repeat: repeat-x;
     background-image: -khtml-gradient(linear, left top, left bottom, from(#5bc0de), to(#339bb9));
