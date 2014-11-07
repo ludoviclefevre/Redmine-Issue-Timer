@@ -1,7 +1,7 @@
 var redmineIssueTimer = (function ($, undefined) {
     "use strict";
 
-    var cssPrefix = 'redmine_time_entry_autofill_';
+    var cssPrefix = 'redmine_issue_timer_';
     var roundInputValueTo = 3;
     var elapsedSeconds = 0;
     var input;
