@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Redmine Issue Timer",
-    "description": "A Redmine extension for timing issues.",
+    "description": "A Redmine issue timer.",
     "version": "1.1",
     "icons": {
         "16": "images/icon-16.png",
