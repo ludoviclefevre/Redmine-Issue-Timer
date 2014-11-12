@@ -2,7 +2,7 @@
   "name": "redmine-issue-timer",
   "version": "1.0.0",
   "dependencies": {
-    "jquery": "~1.11.1"
+    "jquery": "~2.1.1"
   },
   "devDependencies": {}
 }
