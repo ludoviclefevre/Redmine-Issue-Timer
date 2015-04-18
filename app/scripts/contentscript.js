@@ -11,12 +11,17 @@ var redmineIssueTimer = (function ($, undefined) {
     var timerId;
     var url = window.location.host + window.location.pathname;
     var issueUrlId = url.replace(/(\/|\.|\W)/g, ''); //redmineruissues223
+    var storageCounter = 0;//dont want to save every second, only every 15 seconds
+    var commitButton;
+
 
     var init = function () {
         input = $('#time_entry_hours');
         if (input.length === 0) {
             return;
         }
+
+        commitButton = $('input[name="commit"]');
 
         createContainer();
 
@@ -27,6 +32,8 @@ var redmineIssueTimer = (function ($, undefined) {
         setClockValue();
 
         inputOnchangeAutoSave();
+
+        commitButtonHandler();
 
         input.attr('autocomplete', 'off');
 
@@ -128,7 +135,12 @@ var redmineIssueTimer = (function ($, undefined) {
         var numericValue = secondsToHours(elapsedSeconds);
         var newVal = numericValue.toFixed(roundInputValueTo);
         input.val(newVal);
-        localStorage[issueUrlId] = newVal;
+        //save to storage every 15 second
+        if (storageCounter == 15) {
+            localStorage[issueUrlId] = newVal;
+            storageCounter = 0;
+        }
+        storageCounter++;
     };
 
     var secondsToHours = function (t) {
@@ -141,6 +153,23 @@ var redmineIssueTimer = (function ($, undefined) {
 	    	loadValueFromInput();
 	    	setClockValue();
 	    });
+    };
+
+    var commitButtonHandler = function () {
+        //when commit time value we want to reset time value in input, otherwise
+        //we need to manual erase this value
+        commitButton.click(function () {
+            localStorage[issueUrlId + 'onSave'] = localStorage[issueUrlId];
+            //after form submit we must check if value stored in input equal this
+            //value we must reset
+        });
+
+        if (localStorage[issueUrlId] == localStorage[issueUrlId + 'onSave']) {
+            input.val('');
+            elapsedSeconds = 0;
+            setClockValue();
+            localStorage[issueUrlId] = localStorage[issueUrlId + 'onSave'] = 0;
+        }
     };
     
 
