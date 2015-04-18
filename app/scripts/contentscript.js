@@ -9,6 +9,8 @@ var redmineIssueTimer = (function ($, undefined) {
     var pauseButton;
     var clockLabel;
     var timerId;
+    var url = window.location.host + window.location.pathname;
+    var issueUrlId = url.replace(/(\/|\.|\W)/g, ''); //redmineruissues223
 
     var init = function () {
         input = $('#time_entry_hours');
@@ -18,10 +20,18 @@ var redmineIssueTimer = (function ($, undefined) {
 
         createContainer();
 
+        loadValueFromStorage();
+
         loadValueFromInput();
 
         setClockValue();
+
+        inputOnchangeAutoSave();
+
+        input.attr('autocomplete', 'off');
+
     };
+
 
     var createContainer = function() {
         clockLabel = $('<span id="' + cssPrefix + 'clock">00:00:00</span>');
@@ -52,6 +62,12 @@ var redmineIssueTimer = (function ($, undefined) {
 
     var onPauseButtonClick = function () {
         stopTimer();
+    };
+
+    var loadValueFromStorage = function () {
+    	if (localStorage[issueUrlId]) {
+    		input.val(localStorage[issueUrlId]);
+    	}
     };
 
     var loadValueFromInput = function () {
@@ -110,12 +126,23 @@ var redmineIssueTimer = (function ($, undefined) {
     var setInputValue = function () {
         //decimal
         var numericValue = secondsToHours(elapsedSeconds);
-        input.val(numericValue.toFixed(roundInputValueTo));
+        var newVal = numericValue.toFixed(roundInputValueTo);
+        input.val(newVal);
+        localStorage[issueUrlId] = newVal;
     };
 
     var secondsToHours = function (t) {
         return (t / 3600);
     };
+
+    var inputOnchangeAutoSave = function () {
+    	input.on('input', function(){
+	    	localStorage[issueUrlId] = input.val().replace(',', '.');
+	    	loadValueFromInput();
+	    	setClockValue();
+	    });
+    };
+    
 
     init();
 }(jQuery));
