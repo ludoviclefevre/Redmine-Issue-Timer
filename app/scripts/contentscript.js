@@ -101,15 +101,7 @@ var redmineIssueTimer = (function ($, undefined) {
         var m = Math.floor((t - (h * 3600)) / 60);
         var ss = t - (h * 3600) - (m * 60);
 
-        var formattedValue = leftPadding(h.toString(), '0', 2) + ":" + leftPadding(m.toString(), '0', 2) + ":" + leftPadding(ss.toString(), '0', 2);
-        return formattedValue;
-    };
-
-    var leftPadding = function (str, padString, length) {
-        while (str.length < length) {
-            str = padString + str;
-        }
-        return str;
+        return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + ss).slice(-2);
     };
 
     var startTimer = function () {
